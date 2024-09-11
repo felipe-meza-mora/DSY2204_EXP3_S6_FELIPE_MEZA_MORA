@@ -1,5 +1,6 @@
 package com.example.lili
 
+import DetalleScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.example.lili.screens.DetalleScreen
 
 
 class DetalleActivity : ComponentActivity() {
@@ -36,7 +36,10 @@ class DetalleActivity : ComponentActivity() {
                     steps = steps,
                     preparationTime = preparationTime,
                     calories = calories,
-                    status = status
+                    status = status,
+                    onBackClick = {
+                        finish()
+                    }
                 )
             }
         }

@@ -1,10 +1,12 @@
-package com.example.lili.screens
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,11 +27,12 @@ fun DetalleScreen(
     steps: List<String>,
     preparationTime: String,
     calories: Int,
-    status: String
+    status: String,
+    onBackClick: () -> Unit // Añadimos una función lambda para manejar el evento de volver
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
-    ) {0
+    ) {
         Surface(
             modifier = Modifier
                 .fillMaxWidth()
@@ -42,15 +45,22 @@ fun DetalleScreen(
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center,
-                    modifier = Modifier.fillMaxWidth()
+                    horizontalArrangement = Arrangement.Start,  // Cambiado para alinear el botón de volver a la izquierda
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.logo),
-                        contentDescription = "Logo",
-                        modifier = Modifier.size(60.dp)
-                    )
+                    // Botón de volver
+                    IconButton(onClick = { onBackClick() }) {
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "Volver",
+                            tint = Color(0xFF6F334C),
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }
+
                     Spacer(modifier = Modifier.width(8.dp))
+
+                    // Título de la pantalla
                     Text(
                         text = "Lili Recetas",
                         color = Color(0xFF6F334C),
@@ -73,7 +83,6 @@ fun DetalleScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 item {
-
                     Image(
                         painter = painterResource(id = imageResId),
                         contentDescription = name,
@@ -84,7 +93,6 @@ fun DetalleScreen(
                 }
 
                 item {
-
                     Text(
                         text = name,
                         fontSize = 30.sp,
@@ -94,7 +102,6 @@ fun DetalleScreen(
                 }
 
                 item {
-                    //
                     Text(
                         text = description,
                         fontSize = 18.sp,
@@ -103,7 +110,6 @@ fun DetalleScreen(
                 }
 
                 item {
-
                     Column {
                         Text(
                             text = "Tiempo de preparación: $preparationTime",
@@ -124,7 +130,6 @@ fun DetalleScreen(
                 }
 
                 item {
-
                     Text(
                         text = "Pasos para preparar:",
                         fontSize = 22.sp,
@@ -134,7 +139,6 @@ fun DetalleScreen(
                 }
 
                 items(steps) { step ->
-
                     Text(
                         text = step,
                         fontSize = 16.sp,
